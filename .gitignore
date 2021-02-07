@@ -1,0 +1,4 @@
+prod
+build-pods/pods/*
+!build-pods/pods/README.org
+depjar/*.jar

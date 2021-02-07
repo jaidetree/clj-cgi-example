@@ -1,0 +1,18 @@
+#+title: Bin Directory
+
+* What is it?
+
+Typically this would be in your home folder and can hold binaries. It's
+recommended to upload the babashka binary and add the dir to your
+PATH your =~/.bash_profile= for your login shell. This allows you to type `bb
+./test.clj` instead of having to specify the full path to the binary.
+
+Example in =~/.bash_profile=:
+
+#+begin_src bash
+PATH="$PATH:$HOME/bin"
+
+export PATH
+#+end_src
+
+Make sure you give the Babashka static binary exec permissions like ~chmod +x ~/bin/bb~.

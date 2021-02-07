@@ -1,0 +1,4 @@
+#!env bash
+
+echo "Replace me with the babashka linux static binary"
+exit 1

@@ -1,0 +1,11 @@
+#+title: Lib Directory
+
+* What is this directory?
+
+This is the recommended directory to store libs among your multiple Clojure
+projects on a shared server.
+
+You should add your .jar files and static pods here.
+
+See [[../][the base README for general info]]
+See [[../build-pods/][the build-pods dir for info on building static pods]]

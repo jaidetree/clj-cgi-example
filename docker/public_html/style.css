@@ -1,0 +1,57 @@
+body {
+  background: #2d232c;
+  color: #fff;
+  font-family: sans-serif;
+}
+h1, h2, h3 {
+  font-family: "Sriracha", "Marker Felt", script;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 1rem;
+}
+h1 {
+  color: #7cdbab;
+  font-size: 4rem;
+}
+h2, h3 {
+  color: #cd78b0;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.75rem;
+}
+code {
+  font-family: "Courier New", monospace;
+  color: #cd78b0;
+  background: rgba(255, 255, 255, 0.05);
+  display: inline-block;
+  padding: 3px;
+  vertical-align: baseline;
+}
+p {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.page {
+  width: 50rem;
+  margin: 3rem auto;
+}
+a {
+  color: #7cdbab;
+  text-decoration: none;
+  transition: all 250ms ease-in-out;
+}
+a:hover {
+  text-decoration: underline;
+  color: #cd78b0;
+}
+
+.credit {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}

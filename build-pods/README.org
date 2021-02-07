@@ -1,0 +1,111 @@
+#+title: Building Static Pod Binaries
+
+** Pods on Shared Web Servers
+
+Using Babashka we can run Clojure scripts that print rich web pages to stdout
+for use as a cgi-bin script. For connecting to a Postgres database you may need
+the pod.
+
+** Check for Static Builds
+
+Check each pod's releases page to see if a static linux build is already
+included. If not consider creating an upstream pull-request of the pod
+repository to update the circleci script. Keep in mind some pods may generate
+=.circle/config.yml= files from babashka scripts.
+
+** Why build a pod?
+
+Sometimes pods might not have a static build included with their release. When
+that happens you may use this docker file and docker-compose.yml as a template.
+
+** Instructions
+
+1. Clone this repo:
+   #+begin_src bash
+   git clone https://github.com/eccentric-j/clj-cgi-example.git
+   #+end_src
+
+2. Enter into the =build-pods= directory and clone a pod into the =pods= sub-directory
+   #+begin_src bash
+   cd build-pods
+   git clone git@github.com:babashka/babashka-sql-pods.git ./pods/babashka-sql-pods
+   #+end_src
+
+3. Edit the =docker-compose.yml= file and create a build to mount the target pod as =/src= in the
+   container:
+   #+begin_example yaml
+   services:
+    sql:
+        build: .
+        environment:
+        - POD_DB_TYPE=postgresql
+        - BABASHKA_STATIC="true"
+        volumes:
+        - "./pods/babashka-sql-pods:/src"
+   #+end_example
+
+   Be sure to check out the README of the pod you want to build to add
+   additional environment flags.
+
+4. Start up the container and let the build process finish
+
+   #+begin_src bash
+   docker-compose run --rm sql
+   #+end_src
+
+5. Upload the static binary to your web server
+
+   #+begin_src bash
+   scp pods/pod-babashka-sql my.host:~/lib/pod-babashka-sql
+   #+end_src
+
+6. Don't forget to give the pod exec permissions for use in CGI scripts
+
+   #+begin_src bash
+   chmod +x ~/lib/pod-babashka-sql
+   #+end_src
+
+** Using the Pod
+
+From here you should be able to use Babashka's pods API to load it and require
+resources from it.
+
+#+begin_src clojure
+(require '[babashka.pods :as pods])
+(pods/load-pod "/home/<username>/lib/pod-babashka-sql")
+
+(require '[pod.babashka.postgresql :as pg])
+
+(pg/execute! db ["select version()"])
+#+end_src
+
+** Troubleshooting
+
+*** Docker is killing the process or the JVM returns an Out of Memory error
+
+Open up the =docker-compose.yml= and double check the ~BABASHKA_XMX~ environment
+variable:
+#+begin_example yaml
+environment:
+  - BABASHKA_XMX="-J-Xmx3000m"
+#+end_example
+
+The ~4000m~ specifies it can use up to about 4 gigabytes of memory to build it the pod.
+Make sure this equal to or less than the max memory you have allocated to Docker.
+
+*** The pod does not support a BABASHKA_STATIC or BABASHKA_XMX environment var
+
+Some pods may not have this yet. Take a look at
+https://github.com/babashka/babashka-sql-pods/blob/master/script/compile and add
+those switches for the static builds and XMX to the compile script of your
+desired pod. Bonus points for creating an upstream PR.
+
+** More information
+
+Learn more about working with pods and running Clojure on shared hosts at:
+
+https://eccentric-j.com/blog/clojure-like-its-php.html
+
+See the example live at:
+
+https://cgi.eccentric-j.com/metal.clj

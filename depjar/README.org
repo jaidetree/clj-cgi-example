@@ -1,0 +1,44 @@
+#+title: Depjar
+
+A CLI script to create an uberjar from a Clojar coordinate in one command.
+Perfect for creating individual libs you can share between multiple projects in
+a shared hosting environment.
+
+* Usage
+
+#+begin_src bash
+./depjar.clj honeysql/honeysql 1.0.444 honeysql.jar
+#+end_src
+
+** What does it do?
+1. Creates a temporary directory
+2. Generates a deps.edn with that single library
+3. Installs the dep, and generates the classpath with clojure sources removed
+4. Uberjars the libary into a single .jar
+5. Moves the bundled uberjar to current directory with the output name specified like =honeysql.jar=
+6. Removes the temporary directory and files
+
+* Requirements
+
+1. Babashka to run the ~bb~ that powers the depjar.clj script
+2. The Clojure CLI to generate the classpath string and install deps from a
+   =deps.edn= file
+3. A JVM which required by the Clojure CLI
+
+* Add to your path
+
+It may be helpful if you create a symlink to the script that is part of your
+PATH environment variable. This way you can run ~depjar~ from any directory.
+
+#+begin_src bash :results none
+ln -s ~/Projects/clj-cgi-example/depjar/depjar.clj ~/bin/depjar
+#+end_src
+
+You should be able to run ~depjar~ anywhere.
+
+* Motivation
+
+When figuring out how to run the uberjar command to bundle each library up I
+found it somewhat tedious to manually remove the previous deps.edn entry, add
+the new one, and run the commands to uberjar it so this is to help streamline
+that process.

@@ -1,0 +1,6 @@
+#+title: Pods Directory
+
+* What is this used for?
+
+It's recommended to use this directory to contain pod repos and create a
+corresponding =docker-compose.yml= entry for each pod for reusable builds.

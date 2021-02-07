@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    volumes:
+      - "./public_html:/var/www/public_html"
+    ports:
+      - "8080:80"

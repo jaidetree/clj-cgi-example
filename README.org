@@ -1,0 +1,71 @@
+#+title: Clojure on Shared Hosts with Babashka Example
+
+* How does it work?
+A static Babashka binary uploaded to a shared host can run Clojure files as a
+cgi-script. Essentially we can use Clojure as if it were PHP!
+
+** Rationale
+
+Create a MVP or simple web resource using Clojure on a cheap shared account. It
+can easily support multiple projects!
+
+** Live Demo
+
+https://cgi.eccentric-j.com/
+
+** Learn More
+
+An article that covers the rationale, requirements, and setup in more detail:
+
+https://eccentric-j.com/blog/clojure-like-its-php.html
+
+** What's Included
+
+1. [[./example][Live Example Source]]
+2. [[./build-pods][A guide to building static pods with Docker]]
+3. [[./depjar][Depjar: A Babashka CLI script to create single jars of a clojars artifact]]
+4. [[./docker][A Docker environment to test babashka web scripts]]
+
+*** Live Example Source
+
+The source files that are on the [[https://cgi.eccentric-j.com/metal.clj][live demo]]. The libs and binaries are only
+place-holders. Download or build the libs, replace the place-holders, and upload
+those to a shared host.
+
+If you are using this as a starting template be sure to replace any ~<username>~
+references in =example/public_html/cgi.eccentric-j.com/metal.clj= as well as
+
+*** Building Static Pods
+
+While some pods offer a static build in their releases page like
+https://github.com/babashka/babashka-sql-pods/releases. It may be necessary to
+build them locally then upload it to the server. This directory contains a
+docker file and instructions to help speed the process up.
+
+*** Depjar
+
+Since tools like `clj` or `lein` will not be available on the shared host, bb
+can create uberjars we can upload. Depjar is a script that takes a Clojars
+artifact coordinates, downloads the jars, packages it into an uberjar, and puts
+it in the directory the script executed from.
+
+#+begin_src bash
+./depjar/depjar.clj honeysql/honeysql 1.0.444 honeysql.jar
+#+end_src
+
+*** Docker Development Environment
+
+If you are having trouble getting it to work on a shared host you can at least
+use the development docker environment to try it out.
+
+See the [[./docker][Readme]] to learn how to run the site.
+
+** Credit
+
+In the Doom Emacs Discord, it was Taco ([[https://elais.codes/][Elais Player]]) that came up with the idea
+and [[https://rushsteve1.us][rushsteve1]] that helped me understand how it would work.
+
+*** Special Thanks
+
+Big thanks in the Clojurians' Slack to Borkdude ([[https://michielborkent.nl][Michiel Borkent]]) for creating
+[[https://github.com/babashka/babashka][Babashka]] and [[https://www.rubberducking.com/][Didibus]] for helping me figure out the first test Clojure web script.

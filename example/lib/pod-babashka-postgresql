@@ -1,0 +1,3 @@
+#!env bash
+
+echo "Replace me with the pod-babashka-sql linux static binary"

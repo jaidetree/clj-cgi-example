@@ -1,0 +1,10 @@
+services:
+  sql:
+    build: .
+    environment:
+      - POD_DB_TYPE=postgresql
+      - BABASHKA_STATIC="true"
+      - BABASHKA_XMX="-J-Xmx4000m"
+    command: ["bash", "./script/compile"]
+    volumes:
+      - "./pods/babashka-sql-pods:/src"
