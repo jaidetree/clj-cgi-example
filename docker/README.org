@@ -1,0 +1,51 @@
+#+title: Docker Development Environment
+
+This directory is for testing Clojure-driven cgi-scripts using Babashka.
+
+* Usage
+
+Run the following command in a terminal:
+
+#+begin_src bash
+docker-compose up web
+#+end_src
+
+Once the process has started visit:
+
+http://localhost:8080/
+
+* What's Included
+
+- Apache2 Server with CGI Module, root is in =/var/wwww/public_html=
+- Latest version of Babashka =bb=
+- A open-source Java Virtual Machine (JVM)
+- The Clojure CLI tools (=clj=, and =clojure=)
+- Leiningen =lein=
+- Build essentials (not often available on shared hosts, but allows the
+  automatic deps fetching and babashka pod loading to work)
+
+* Rationale
+
+While the deploy process with a shared server is easy to automate, it's
+hard to beat the speed and reliability of running it locally with Docker. Simply
+save your files and refresh your browser.
+
+If even that becomes tedious I recommend https://www.browsersync.io/. It can
+watch source files and either refresh the page or in the case of CSS file updates
+automatically inject it into your page. After installing the npm package,
+configure it to proxy the docker web URL http://localhost:8080 on your local machine.
+
+If you run into issues with that let me know and I'll add it to this repo.
+
+* Notes
+
+- If adding in a db container into the =./docker-compose.yml= file, note that
+  shared hosts, if they offer PostgreSQL, tend to have very old versions. Plan accordingly!
+
+- On a production-grade shared server you will need to upload your libs. Any
+  pods will need to be statically built, some pods include the static builds on
+  the releases page so check there first. Additionally you will need to upload
+  the static binary of Babashka to use it on a shared host.
+
+- Refer to other docs in this repo or external sources for more information
+  about the nuances between this environment and a shared host.
