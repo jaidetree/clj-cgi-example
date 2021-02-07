@@ -22,9 +22,9 @@
 
 ;; Add jars and current directory to classpath to import library code
 
-(add-classpath (s/join "::" [CWD
-                             (lib "gaka.jar")
-                             (lib "honeysql.jar")]))
+(add-classpath (s/join ":" [CWD
+                            (lib "gaka.jar")
+                            (lib "honeysql.jar")]))
 (pods/load-pod (lib "pod-babashka-postgresql"))
 
 ;; Require our main page code

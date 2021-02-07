@@ -90,4 +90,4 @@
          {:style {:font-size "0.8rem"
                   :color "rgba(255, 255, 255, 0.6)"
                   :font-style "italic"}}
-         "Powered by jaunty narcisism"]]]]]])))
+         "Powered by jaunty narcissism"]]]]]])))
