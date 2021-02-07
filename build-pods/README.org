@@ -56,7 +56,7 @@ that happens you may use this docker file and docker-compose.yml as a template.
 5. Upload the static binary to your web server
 
    #+begin_src bash
-   scp pods/pod-babashka-sql my.host:~/lib/pod-babashka-sql
+   scp pods/babashka-sql-pods/pod-babashka-sql my.host:~/lib/pod-babashka-sql
    #+end_src
 
 6. Don't forget to give the pod exec permissions for use in CGI scripts
