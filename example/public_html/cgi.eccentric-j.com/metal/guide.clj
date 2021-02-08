@@ -186,7 +186,7 @@
                :border-radius (rems 16)
                :background "rgba(45, 36, 45, 0.8)"
                :padding (rems 10)
-               }}
+               :z-index 200}}
       [:span
        {:style {:color "#CC79B0"
                 :font-family "Sriracha, cursive"}}
