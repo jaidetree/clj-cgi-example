@@ -1,22 +1,32 @@
 #+title: Depjar
 
-A CLI script to create an uberjar from a Clojar coordinate in one command.
-Perfect for creating individual libs you can share between multiple projects in
-a shared hosting environment.
+* Purpose
+
+When using Babashka to create Clojure websites on shared hosts, there are three
+main options to include them in projects.
+
+1. Uberjar all your libraries from a =deps.edn= file using Babashka and Clojure CLIs
+2. Uberjar each library separately
+3. [[Uberscript][https://book.babashka.org/#_uberscript]] your script sources and libraries into a single
+
+Check out
+https://93632dbe219c.ngrok.io/blog/clojure-like-its-php.html#working-with-libraries
+for a deeper breakdown and explanation of each method.
 
 * Usage
 
 #+begin_src bash
-./depjar.clj honeysql/honeysql 1.0.444 honeysql.jar
+./depjar.clj ./deps.edn
 #+end_src
 
 ** What does it do?
-1. Creates a temporary directory
-2. Generates a deps.edn with that single library
+1. Splits the provied deps.edn file into separate deps.edn files
+2. For each isolated deps.edn file save it into a separate temporary directory
 3. Installs the dep, and generates the classpath with clojure sources removed
 4. Uberjars the libary into a single .jar
 5. Moves the bundled uberjar to current directory with the output name specified like =honeysql.jar=
 6. Removes the temporary directory and files
+7. Continues for each library
 
 * Requirements
 

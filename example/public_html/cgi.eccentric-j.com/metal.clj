@@ -2,6 +2,7 @@
 
 (ns cgi.metal
   (:require
+   [babashka.fs :as fs]
    [babashka.classpath :refer [add-classpath]]
    [babashka.pods :as pods]
    [clojure.string :as s]
@@ -9,7 +10,10 @@
 
 ;; Dynamic Libs
 (def LIB-DIR "/home1/<username>/lib/")
-(def CWD (or (System/getenv "DOCUMENT_ROOT") (System/getenv "PWD")))
+(def CWD
+  (if-let [filename (System/getenv "SCRIPT_FILENAME")]
+    (str (fs/parent filename))
+    (System/getenv "PWD")))
 
 (defn lib
   "

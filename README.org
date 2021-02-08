@@ -45,12 +45,11 @@ docker file and instructions to help speed the process up.
 *** Depjar
 
 Since tools like `clj` or `lein` will not be available on the shared host, bb
-can create uberjars we can upload. Depjar is a script that takes a Clojars
-artifact coordinates, downloads the jars, packages it into an uberjar, and puts
-it in the directory the script executed from.
+can create uberjars we can upload. Depjar is a script that takes a deps.edn
+files, uses Babashka to install deps, then create an uberjar for each library.
 
 #+begin_src bash
-./depjar/depjar.clj honeysql/honeysql 1.0.444 honeysql.jar
+./depjar/depjar.clj ./deps.edn
 #+end_src
 
 *** Docker Development Environment

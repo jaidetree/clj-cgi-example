@@ -1,3 +1,4 @@
 {:db/name "<pg-database-name>"
  :db/user "<pg-usernmae>"
- :db/password "<pg-password>"}
+ :db/password "<pg-password>"
+ :fa/kit-key "<font-awesome-kit-id>"}

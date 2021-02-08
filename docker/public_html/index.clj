@@ -69,13 +69,6 @@
         "Happy Hacking! "
         [:i.fad.fa-laptop-code]]]
       [:section.credit
-       [:h3
-        {:style {:border "none"
-                 :padding-bottom "0"
-                 :margin-bottom "0"
-                 :line-height 1.3}}
-        [:i]
-        "Made by"]
        [:p
         {:style {:text-align "center"}}
         [:a

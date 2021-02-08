@@ -152,6 +152,9 @@
             :href "https://fonts.googleapis.com/css2?family=Metal+Mania&family=Sriracha&display=swap"}]
     [:link {:rel "stylesheet"
             :href "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/atelier-cave-dark.min.css"}]
+    [:script
+     {:src (str "https://kit.fontawesome.com/" (:fa/kit-key secrets) ".js")
+      :crossorigin "anonymous"}]
     [:style (raw-string style)]
     [:style (raw-string guide/styles)]]
    [:body
@@ -160,6 +163,4 @@
      guide/content]
     [:script {:src "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"}]
     [:script {:src "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/clojure.min.js"}]
-    [:script "hljs.initHighlightingOnLoad();"]
-    ]])
-
+    [:script "hljs.initHighlightingOnLoad();"]]])
