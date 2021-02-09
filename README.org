@@ -19,6 +19,23 @@ An article that covers the rationale, requirements, and setup in more detail:
 
 https://eccentric-j.com/blog/clojure-like-its-php.html
 
+** Benchmarks
+
+Using [[https://tratt.net/laurie/src/multitime/releases.html][multitime]] 1.4 within the [[./docker][development docker]] setup, the tests ran the example entrypoint
+=metal.clj= script 20 times.
+
+#+begin_src bash
+multitime -n20 -s0 ./metal.clj
+#+end_src
+
+*** Results
+
+|      |  Mean | Std.Dev. |   Min | Median |   Max |
+|------+-------+----------+-------+--------+-------|
+| real | 0.211 |    0.013 | 0.187 |  0.210 | 0.239 |
+| user | 0.092 |    0.008 | 0.077 |  0.092 | 0.103 |
+| sys  | 0.052 |    0.007 | 0.045 |  0.050 | 0.071 |
+
 ** What's Included
 
 1. [[./example][Live Example Source]]
